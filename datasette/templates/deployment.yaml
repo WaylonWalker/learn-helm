@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: datasette
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: datasette
+  template:
+    metadata:
+      labels:
+        app: datasette
+    spec:
+      containers:
+        - name: datasette
+          image: datasetteproject/datasette:latest
+          command: ["datasette", "{{ .Values.mountPath }}/{{ .Values.database }}"]
+          ports:
+            - containerPort: 8001
+          volumeMounts:
+            - name: sqlite-data
+              mountPath: "{{ .Values.mountPath }}"
+      volumes:
+        - name: sqlite-data
+          hostPath:
+            path: "{{ .Values.hostPath }}"
+            type: Directory

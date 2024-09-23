@@ -1,0 +1,45 @@
+# templates/cronjob.yaml
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: {{ .Release.Name }}-cronjob
+spec:
+  schedule: "{{ .Values.schedule }}"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+            - name: temperature-fetcher
+              image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+              imagePullPolicy: {{ .Values.image.pullPolicy }}
+              command: ["/bin/bash", "-c"]
+              args:
+                - |
+                  echo "Running temperature_fetcher.py" && \
+                  pip install requests && \
+                  echo "Fetching temperature" && \
+                  python /scripts/temperature_fetcher.py && \
+                  sleep 300
+              env:
+                - name: CITY
+                  value: "{{ .Values.city }}"
+                - name: API_KEY
+                  value: "{{ .Values.apiKey }}"
+                - name: MOUNT_PATH
+                  value: "{{ .Values.mountPath }}"
+              volumeMounts:
+                - name: sqlite-data
+                  mountPath: "{{ .Values.mountPath }}"
+                - name: script-volume
+                  mountPath: /scripts
+          restartPolicy: OnFailure
+          volumes:
+            - name: sqlite-data
+              hostPath:
+                path: "{{ .Values.hostPath }}"
+                type: Directory
+            - name: script-volume
+              configMap:
+                name: {{ .Release.Name }}-script
+

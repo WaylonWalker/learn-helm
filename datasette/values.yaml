@@ -1,0 +1,4 @@
+# values.yaml
+mountPath: "/data"
+hostPath: "/sqlite-data"
+database: "temperature.db"
