@@ -29,11 +29,11 @@ spec:
                   python /scripts/temperature_fetcher.py
               resources:
                 requests:
-                  cpu: "50m"
-                  memory: "64Mi"
+                  cpu: "25m"
+                  memory: "8Mi"
                 limits:
-                  cpu: "100m"
-                  memory: "128Mi"
+                  cpu: "50m"
+                  memory: "16Mi"
               env:
                 - name: CITY
                   value: "{{ .Values.city }}"
