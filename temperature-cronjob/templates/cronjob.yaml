@@ -26,7 +26,7 @@ spec:
                   echo "Installing dependencies" && \
                   pip install requests && \
                   echo "Fetching temperature" && \
-                  python /scripts/temperature_fetcher.py && \
+                  python /scripts/temperature_fetcher.py
               resources:
                 requests:
                   cpu: "100m"
