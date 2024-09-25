@@ -13,7 +13,7 @@ spec:
     spec:
       activeDeadlineSeconds: 180  # Limits how long a job can be active
       ttlSecondsAfterFinished: 100  # Cleans up finished jobs after 100 seconds
-      backoffLimit: 3  # Number of retries before considering the job failed
+      backoffLimit: 0  # Number of retries before considering the job failed
       template:
         spec:
           containers:
