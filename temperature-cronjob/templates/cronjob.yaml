@@ -23,11 +23,10 @@ spec:
               command: ["/bin/bash", "-c"]
               args:
                 - |
-                  echo "Running temperature_fetcher.py" && \
+                  echo "Installing dependencies" && \
                   pip install requests && \
                   echo "Fetching temperature" && \
                   python /scripts/temperature_fetcher.py && \
-                  sleep 300
               resources:
                 requests:
                   cpu: "100m"
