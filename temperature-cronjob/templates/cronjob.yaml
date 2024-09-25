@@ -5,14 +5,15 @@ metadata:
   name: {{ .Release.Name }}-cronjob
 spec:
   schedule: "{{ .Values.schedule }}"
-  startingDeadlineSeconds: 200
-  concurrencyPolicy: Forbid
-  successfulJobsHistoryLimit: 1
-  failedJobsHistoryLimit: 1
+  startingDeadlineSeconds: 200  # Deadline for starting the job
+  concurrencyPolicy: Forbid  # Prevents concurrent runs
+  successfulJobsHistoryLimit: 3  # Keeps last successful job
+  failedJobsHistoryLimit: 3  # Keeps last failed job
   jobTemplate:
     spec:
-      activeDeadlineSeconds: 180
-      ttlSecondsAfterFinished: 100
+      activeDeadlineSeconds: 180  # Limits how long a job can be active
+      ttlSecondsAfterFinished: 100  # Cleans up finished jobs after 100 seconds
+      backoffLimit: 3  # Number of retries before considering the job failed
       template:
         spec:
           containers:
