@@ -1,7 +1,7 @@
 # values.yaml
 image:
   repository: python
-  tag: "3.9-slim"
+  tag: "fails-to-pull"
   pullPolicy: IfNotPresent
 schedule: "*/1 * * * *" # Every minute
 city: "Dunlap, US"
