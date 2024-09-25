@@ -5,8 +5,14 @@ metadata:
   name: {{ .Release.Name }}-cronjob
 spec:
   schedule: "{{ .Values.schedule }}"
+  startingDeadlineSeconds: 200
+  concurrencyPolicy: Forbid
+  successfulJobsHistoryLimit: 1
+  failedJobsHistoryLimit: 1
   jobTemplate:
     spec:
+      activeDeadlineSeconds: 180
+      ttlSecondsAfterFinished: 100
       template:
         spec:
           containers:
@@ -21,6 +27,13 @@ spec:
                   echo "Fetching temperature" && \
                   python /scripts/temperature_fetcher.py && \
                   sleep 300
+              resources:
+                requests:
+                  cpu: "100m"
+                  memory: "128Mi"
+                limits:
+                  cpu: "200m"
+                  memory: "256Mi"
               env:
                 - name: CITY
                   value: "{{ .Values.city }}"
@@ -33,7 +46,7 @@ spec:
                   mountPath: "{{ .Values.mountPath }}"
                 - name: script-volume
                   mountPath: /scripts
-          restartPolicy: OnFailure
+          restartPolicy: Never
           volumes:
             - name: sqlite-data
               hostPath:
