@@ -1,3 +1,5 @@
+set dotenv-load
+
 default:
     @just --choose
 
@@ -13,6 +15,13 @@ kind-delete:
 
 sealed-secrets-install:
     kubectl apply -f https://github.com/bitnami-labs/sealed-secrets/releases/download/v0.19.4/controller.yaml
+
+sealed-secretes-backup:
+    kubectl get secret -n kube-system -l sealedsecrets.bitnami.com/sealed-secrets-key -o yaml > private/sealed-secrets-key.yaml
+
+seal-openweathermap-api-key:
+    kubectl create secret generic mysecret --from-literal=openweathermap-api-key=${OPENWEATHERMAP_API_KEY} --dry-run=client -o yaml > private/openweathermap-api-key.yaml
+    kubeseal --format=yaml < private/openweathermap-api-key.yaml > temperature-cronjob/templates/openweathermap-api-key.yaml
 
 argo-install:
     kubectl create namespace argocd

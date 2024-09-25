@@ -38,10 +38,13 @@ spec:
               env:
                 - name: CITY
                   value: "{{ .Values.city }}"
-                - name: API_KEY
-                  value: "{{ .Values.apiKey }}"
                 - name: MOUNT_PATH
                   value: "{{ .Values.mountPath }}"
+                - name: API_KEY
+                  valueFrom:
+                    secretKeyRef:
+                      name: openweathermap-api-key
+                      key: openweathermap-api-key
               volumeMounts:
                 - name: sqlite-data
                   mountPath: "{{ .Values.mountPath }}"

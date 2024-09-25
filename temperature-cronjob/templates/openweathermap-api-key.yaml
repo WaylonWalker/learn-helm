@@ -1,0 +1,15 @@
+---
+apiVersion: bitnami.com/v1alpha1
+kind: SealedSecret
+metadata:
+  creationTimestamp: null
+  name: mysecret
+  namespace: default
+spec:
+  encryptedData:
+    openweathermap-api-key: AgCFICyiqMaxx5vf4D06GuuB/xoC8SJJ43KD5+ipsF7stwzDN7BWQexnPAgPvCMiRq+w+oRRbR/IBIYPk4Ng3kdTwYjkCf1rUFogaHdACs9dS1mhaW9ipwd2rO7ImJVVJUZgkAmEv/F6JBz+cR4w6RUsU8OcDBLqPMehe8JG/YrXPu2hJt38lzl8Hry/j7ydgm5nq7fxuHGbY66FKyVrtW/zzKQhZHYojDvS0Qez/OsWFz7I8o/287qoQjcxPr8giniIo3EPxfT5XjAB5HymJUD9DgUSgjvqAKDLRGrSuomoXi42OWywzi3heq2LgsJFm6BeMU9tilTXDN6AjiN+47OTY4FX8twUiRci+wPRTWp5eSy1utoQf/VW6PRisFVt0z2D7ZBEFLMYrJuAqQhSrEDxvLQqVF5h4h6tXHAlSsinLp0jXYdcM0v6MGzMUSaQOxWjNrBeTdM6TIh7YWdpoC1msHxh+N939ru0Q0Nt/d2sy8oRqVsXh6JxIP/QTpyR5d5qNk10nOj2LojA4sfnJZTALEFFYp1gfYNmbU3O4QW0Qye0PnZ6nnhJ+ox6dCN8yuL+Ci8hMxPMzvVYeZ5Am8wZ7feeFeWpClMdW2sm3koGj4+M60BMs9SOfDuBAK22t2sD6ShP3xRI7MEbsOzMkJNizVqira55YQWUn6aLBMOW90ghD5J7QW77ih3r4oq60OGUX3yc9hlJnvgBblYL1KRVtPgawUelK3Q3EoKAok6YjA==
+  template:
+    metadata:
+      creationTimestamp: null
+      name: mysecret
+      namespace: default
