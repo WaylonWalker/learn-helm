@@ -1,0 +1,18 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: temperature-cronjob
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: 'https://github.com/WaylonWalker/learn-helm.git'
+    targetRevision: HEAD
+    path: temperature-cronjob
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: default
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
